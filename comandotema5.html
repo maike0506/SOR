@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+        .encabezado{
+          position: relative;
+          padding: 0%;
+          background-color:purple;
+          color: black;
+          text-align: center;
+        }
+        .subtitulo{
+            position: relative;
+            padding: 0%;
+            background-color: grey;
+            text-align: center;
+
+        }
+        .contenido{
+            position: relative;
+            padding: auto;
+            background-color: bisque;
+            text-align: center;
+
+        }
+        .contuno{
+              font-size: 24px;
+              font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+        }
+        .contdos,.conttres,.contcuatro,.contcinco,.contseis,.contsiete{
+            border: 1px solid black;
+        }
+        
+    </style>
+</head>
+<body>
+    
+<header class="encabezado">
+    <h1>COMANDOS DE TELNET</h1>
+    <hr> <br><br>
+</header>
+<nav class="subtitulo">
+    <h3>CONFIGURACION EN EL SERVIDOR</h3>
+</nav>
+
+<main class="contenido">
+    <details>
+        <summary class="contuno">DESPLEGAR</summary>
+      
+        <h6>Instalamos el siguiente paquete</h6>
+          <code class="contdos">
+            <b>sudo apt install openbsd-inetd</b>
+          </code> <br>
+    
+          <h5>Instalamos Telnet</h5>
+          <CODE class="conttres">
+            <b>sudo apt install telnetd</b>
+          </CODE> <br><br>
+    
+          <h6>Verificat el servidor inetd funciona correctamente</h6>
+             <p>accedemos al siguiente fichero</p>
+             <code class="contcuatro">
+                <b>sudo nano /etc/inetd.conf</b>
+             </code> <br>
+           <p>verificamos que la linea de telnet no tenga delante el simbolo de <b>#</b</p>
+    
+           <h6>Reiniciamos el fichero de inetd</h6>
+          <CODE class="contcinco">
+            <b>sudo /etc/init.d/openbsd-inetd restart</b> 
+          </CODE> <br>
+          <h6>Verificar que el servicio de telenet esta ala escucha</h6>
+    
+          <code class="contseis">
+            netstat -ltp
+            netstat -ltpn
+          </code> <br>
+    
+          <h6>Ahora solo nos dirijimos al equipo cliente y escribimos el siguiente comando </h6>
+          <code class="contsiete">
+            <b>Telnet direccion ip / Nombre del equipo > </b>
+          </code>
+    
+      </details>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</main>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
