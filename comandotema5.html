@@ -60,35 +60,35 @@
         <summary class="contuno">DESPLEGAR</summary>
       
         <h4>Instalamos el siguiente paquete</h4>
-          <code class="contdos">
+          <code>
             <b>sudo apt install openbsd-inetd</b>
           </code> <br>
     
           <h4>Instalamos Telnet</h4>
-          <CODE class="conttres">
+          <CODE>
             <b>sudo apt install telnetd</b>
           </CODE> <br><br>
     
           <h4>Verificat el servidor inetd funciona correctamente</h4>
              <p>accedemos al siguiente fichero</p>
-             <code class="contcuatro">
+             <code>
                 <b>sudo nano /etc/inetd.conf</b>
              </code> <br>
            <p>verificamos que la linea de telnet no tenga delante el simbolo de <b>#</b</p>
     
            <h4>Reiniciamos el fichero de inetd</h4>
-          <CODE class="contcinco">
+          <CODE>
             <b>sudo /etc/init.d/openbsd-inetd restart</b> 
           </CODE> <br>
           <h4>Verificar que el servicio de telenet esta ala escucha</h4>
     
-          <code class="contseis">
+          <code>
             netstat -ltp
             netstat -ltpn
           </code> <br>
     
           <h4>Ahora solo nos dirijimos al equipo cliente y escribimos el siguiente comando </h4>
-          <code class="contsiete">
+          <code>
             <b>Telnet direccion ip / Nombre del equipo > </b>
           </code>
     
