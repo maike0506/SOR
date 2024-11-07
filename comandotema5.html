@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>comandostema5sor</title>
     <style>
         body{
             background-color: grey;
@@ -37,7 +37,10 @@
         .contdos,.conttres,.contcuatro,.contcinco,.contseis,.contsiete{
             border: 1px solid black;
         }
-        
+        .h4{
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        }
     </style>
 </head>
 <body>
@@ -54,35 +57,35 @@
     <details>
         <summary class="contuno">DESPLEGAR</summary>
       
-        <h6>Instalamos el siguiente paquete</h6>
+        <h4>Instalamos el siguiente paquete</h4>
           <code class="contdos">
             <b>sudo apt install openbsd-inetd</b>
           </code> <br>
     
-          <h5>Instalamos Telnet</h5>
+          <h4>Instalamos Telnet</h4>
           <CODE class="conttres">
             <b>sudo apt install telnetd</b>
           </CODE> <br><br>
     
-          <h6>Verificat el servidor inetd funciona correctamente</h6>
+          <h4>Verificat el servidor inetd funciona correctamente</h4>
              <p>accedemos al siguiente fichero</p>
              <code class="contcuatro">
                 <b>sudo nano /etc/inetd.conf</b>
              </code> <br>
            <p>verificamos que la linea de telnet no tenga delante el simbolo de <b>#</b</p>
     
-           <h6>Reiniciamos el fichero de inetd</h6>
+           <h4>Reiniciamos el fichero de inetd</h4>
           <CODE class="contcinco">
             <b>sudo /etc/init.d/openbsd-inetd restart</b> 
           </CODE> <br>
-          <h6>Verificar que el servicio de telenet esta ala escucha</h6>
+          <h4>Verificar que el servicio de telenet esta ala escucha</h4>
     
           <code class="contseis">
             netstat -ltp
             netstat -ltpn
           </code> <br>
     
-          <h6>Ahora solo nos dirijimos al equipo cliente y escribimos el siguiente comando </h6>
+          <h4>Ahora solo nos dirijimos al equipo cliente y escribimos el siguiente comando </h4>
           <code class="contsiete">
             <b>Telnet direccion ip / Nombre del equipo > </b>
           </code>
