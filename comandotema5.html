@@ -132,10 +132,65 @@
           <summary> como acceder al servidor ftp desde cliente</summary>
            <p>no hace falta instalar nada en el equipo cliente solo nos pedira que escribimos nuestro nombre de usuario ftp,una ves escrito nuestro nombre nos pedira nuestra contrasena </p>
          </details>
+          
+          <h4>COMANDO PARA ACCEDER AL SERVIDOR FTP DESDE CLIENTE</h4>
+            <code>
+              ftp <direccion ip >
+            </code>
+
+            <h4>COMANDO lcd PARA DESCARGAR ARCHIVOS A OTRO DIRECOTRIO LOCAL</h4>
+          
+             <code>
+               lcd /documento 
+             </code>
+             <details>
+               esto copiar los archivo en el directorio documento del cliente 
+             </details>
+             <h4>PARA DESCAR UN SOLO ARCHIVO UTILIZAMOS EL COMANDO GET</h4>
+            
+             <code>
+               get backup.zip
+             </code>
+              
+             <details>
+              lo que hara sera descargar el archivo backpu.zip
+             </details>
+            
+             <h4> PARA DESCARGAR VARIOS ARCHIVOS A LA VEZ CON EL COAMNDO MGET</h4>            
+             <code>
+               mget backup.zip backup2.zip
+                      </code>
+          
+              <h4>COMANDO PARA CERRAR CONEXION CON EL SERVIDOR FTP</h4>
+          
+               <code>
+                quit  <br><br> 
+
+                 bye 
+               </code>
+             <h4>SUBIENDO ARCHIVO CON COMANDOS FTP</h4>
+             <code>
+               put imagen.png
+             </code>
+             <details>
+              para cargar un archivo desde un directorio local a un servidor ftp
+             </details>
+              
+             <h4>PARA CARGAR MULTIPLES ARCHIVOS CON COMANDO FTP</h4>
+             <code>
+              mput image1.png image2.png 
+             </code>
+             
+              <h4> COMANDO PARA VER EL MANUAL FTP </h4>
+
+            <code>
+              sman ftp
+            </code> <br>
+            
 
 
 
-         
+
             </details>
 
     
