@@ -90,9 +90,54 @@
           <h4>Ahora solo nos dirijimos al equipo cliente y escribimos el siguiente comando </h4>
           <code>
             <b>Telnet direccion ip / Nombre del equipo > </b>
+         </code>
+
+         <h4>VERIFICAR SI UN PUERTO ESTA ABIERTO CON TELNET</h4>
+              <code>
+                telnet <direccion_ip> 22
+              </code>
+        <H4>ACCEDER DESDE UN CLIENTE TELNET (CON EL NOMBRE HOST Y HOSTNAME)</H4>
+           
+        <code>
+           telnet <nombre host> <nombre hostname> 
+        </code>
+
+        <p>en este caso estamos entrando con el nombre de la maquina no con la ip </p>
+       
+         <h4>CAMBIAR EL PUERTO DEL SERVIDOR TELNET</h4>
+
+         <code>
+           sudo nano /etc/services
+         </code>
+
+         <p>aqui cambiamos la  lena de telnet donde se especifica el puerto</p>
+       
+         <h4>REINICIAR EL SERVIDOR TELNET </h4>
+          <code>
+            sudo /etc/init.d/openbsd-inetd restart 
           </code>
-    
-      </details>
+         
+
+          <h4>INSTALAR EL SERVIDOR FTP</h4>
+       
+         <code>
+          sudo apt install vsftpd
+         </code>
+          
+         <h4>INICIAR EL SERVIDOR FTP</h4>
+          <code>
+            sudo systemctl status vsftpd.service
+          </code>
+         <details>
+          <summary> como acceder al servidor ftp desde cliente</summary>
+           <p>no hace falta instalar nada en el equipo cliente solo nos pedira que escribimos nuestro nombre de usuario ftp,una ves escrito nuestro nombre nos pedira nuestra contrasena </p>
+         </details>
+
+
+
+         
+            </details>
+
     
     
     
