@@ -70,11 +70,12 @@
           </CODE> <br><br>
     
           <h4>Verificat el servidor inetd funciona correctamente</h4>
-             <p>accedemos al siguiente fichero</p>
              <code>
                 <b>sudo nano /etc/inetd.conf</b>
              </code> <br>
-           <p>verificamos que la linea de telnet no tenga delante el simbolo de <b>#</b</p>
+          <details>
+            <p>verificamos que la linea de telnet no tenga delante el simbolo de <b>#</b</p>
+          </details>
     
            <h4>Reiniciamos el fichero de inetd</h4>
           <CODE>
@@ -110,13 +111,16 @@
            sudo nano /etc/services
          </code>
 
-         <p>aqui cambiamos la  lena de telnet donde se especifica el puerto</p>
+         <details>
+            <p>aqui cambiamos la  lena de telnet donde se especifica el puerto</p>
+         </details>
        
          <h4>REINICIAR EL SERVIDOR TELNET </h4>
           <code>
             sudo /etc/init.d/openbsd-inetd restart 
           </code>
          
+          <H2> FTP </H2>
 
           <h4>INSTALAR EL SERVIDOR FTP</h4>
        
@@ -186,7 +190,30 @@
             <code>
               sman ftp
             </code> <br>
-            
+
+            <h1>instalcion de ftp</h1>
+            <code>
+                sudo apt update <br>
+                sudo apt install vsftpd 
+            </code> <br>
+
+            <h4>Iniciar y habilitar el servicio de vsftpd</h4>
+            <code>
+ sudo systemctl start vsftpd  <br> 
+            </code>
+  <h4>Comprobar que el servcio esta corriendo</h4>
+  <code>
+     sudo systemctl status vsftpd 
+   </code><br>
+
+   <h4> fichero de configuracion de vsftpd </h4>
+  <code>
+     sudo nano /etc/vsftpd.conf 
+  </code>
+   <details>
+     aqui tenemos que descomentar la linea que dice "write_enable=YES"
+   </details><br>
+
 
 
 
