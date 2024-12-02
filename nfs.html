@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1> CONFIGURACMOS NFS   </h1>
+ <h3> PRIMERO INSTALMOS EL PAQUETE DE NFS EN EL SERVIDOR </h3> <br><br>
+   <code>
+      sudo apt update <br>
+      sudo apt install nfs-kernel-server <br>
+   </code> 
+ 
+   <h3> INSSTALAMOS EL PAQUETE DE NFS EN EL CLIENTE </h3>
+
+     <code>
+          sudo apt update <br>
+           sudo apt install  nfs-common <br>
+     </code>
+ 
+      <h3> EN  EL SERVIDOR CREAMOS LOS DIRECTORIOS QUE QUERAMOS CONPARTIR CON LOS CLIENTES NFS</h3>
+
+
+      <code>
+         sudo mkdir /var/nfs/read/michael-p  <br>
+      </code> <br><br>
+      <p> como hemos creado el directorio como sudo la propiedad es de <b>root </b>  es decir que le tenemos que cambiar a <b>nobody: nogroup </b> con esto los superusuario de los clientes no podran ejecutar los archivos como sudo o superusuarios </p> <br>
+       <code>
+          chown  nobody: nogroup /var/nfs/read/michael 
+       </code> <br><br>
+
+
+      <h3> luego nos dirijimos al fichero de "exports"</h3>
+       <CODE>
+          sudo nano /etc/exports 
+       </CODE><br><br>
+
+       <p> en ese fichero tenemos anadir el  directorio que acabamos de crear junto con los permisos y la ip del cliente  </p>
+       <code>
+          /var/nfs/read/michael   client.ip (rw,syc,no_root_tree,)
+       </code> <br>
+        <p> desglozando la siguiente linea <b>client.ip (rw,syc,no_root_squash,)</b> </p> 
+   
+         <ul>
+             <li> <b>cliente.ip :</b> aqui introducimos la ip de nuestro cliente que va utilizar el servicio de nfs </li> <br>
+              <li> <b> rw :</b> son permisos que le estamos dando a los clientes con los que estamos compartiendo dicho directorio <b> ro L  </b> aqui solo estamos dando permisos de escritura al recurso compartido </li> <br>
+             <li> <b> sys :</b> este indica que todas las operacioons de escritura en el sistema dearchivos compartido se ejecutar de manera sincronica  </li> <br>
+              <li><b> no_root_squash : </b> permite que el usuario root en el cliente mantenga privilegios de administrado en el sistema compartido </li>  <br>
+               <li> <b> </b></li>
+         </ul>
+            <p> una vez configurado esto en el servidor ejecutamos el siguiete comando para  que se exporte <br><br> 
+              <code> <b>sudo exportfs -a  </b> </code> <br> <br> luego0 ejecutamos el siguiente comando para restablecer el sercicion de nfs con el siguiete comando <br> <code><b>
+               sudo systemctl restart 
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               nfs-kernel-server  </b>
+              </code> <br> <br> para ver los el estado de nuestro servidor nfs ejecutamos el siguiente comando <br> <code><b> sudo systemctl status nfs-kernel-server</b> </code> <br> </p> 
+         <br><br>
+          <h4> EN LA MAQUINA CLIENTE CREAMOS LOS DIRECTORIOS </h4> <br><br>
+          <code> <b> sudo mkdir -p /mnt/read/michael </b></code> <br><br>
+           <p> como vemos he creado el directo " /mnt/read/michael/" que es donde montaremos el directorio que crearmos en nuestro servidor nfs  con el siguiente comando 
+
+             <br><br> <code> sudo mount < direcion ip servidor >:/var/nfs/read/michael    /mnt/read/michael  </code>
+           </p> <br> <br>
+            <p> una vez hecho el montaje solo quedaria comprobar el montaje con el siguiente comando </p> <br>
+              <code>
+                 <b> df -h </b>
+              </code> <br><br>
+               <h4><b>COPIAR LOS MONTAJES DE MTAB A FSTAB</b></h4><br>
+               <p> para que los montajes sean permanentes tenemos primero ir al fichero de mtab copiar la ultima linea que hay y llevarlo al fichero fstab </p> <br>
+                <code>
+                   $ sudo nano /etc/mtab 
+                </code> <br>
+                <p><b> luego nos dirijimos al fichero  fstab y copiamos las lineas </b></p> <br>
+                 <code>
+                    $ sudo nano /etc/fstab 
+                 </code> <br><br>
+               
+
+       <a href=" comandossan.hmtl" id="ir">ir acomando san </a>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body {
+             background-color: aqua;
+         }
+         h1{
+             color: red;
+         }
+        h4{ 
+             color: blueviolet;
+        }
+        p{
+             color: blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <H1> <B> COMO CONFIGURAR TELNET </B></H1>
+
+ <header>
+     <h1> PRIMERA PASO INSTALAR EL SIGUIENTE PAQUETE QUE ES EL DEMONIO DE TELENET</h1> <br>
+       <code>
+          $ sudo apt update <br><br>
+          $ sudo apt install openbsd-inetd
+       </code> <br>
+    <p> <b>cuando intalemos este paque tenemos que mirar su fichero de configuracion para ver si tiene habilitado el telnet y no lo tiene comentado</b></p>
+ 
+     <code>
+          $ sudo nano /etc/inetd.conf <br> 
+     </code> <br><br>
+
+     <p> en este fichero lo que tenemos que mirar es que la linea del telnet no este comentada basicamente <br> si esta comentado le quitamos la  #  y luego tendremos que reiniciar el demonio de openbsd-inetd con el siguiente comando <br>
+    <br><br><code>
+         sudo /etc/init.d/openbds-inetd restart 
+    </code> </p> <br><br>
+     <h4> <b> instalacion del  demonio telnet</b></h4> <br>
+      <code>
+         $ sudo apt install telnetd 
+      </code> <br><br>
+
+      <h4> <b> PARA EJECUTAR EL SIGUIENTE COMANDO TENDREMOS QUE VERIFICAR QUE TENGAMOS INTALADO EL "net-tools"<br></h4> <br><br>
+        <code>
+             which net-tools 
+        </code> <br>
+      <p> con este comando verificaremos que tengamos instalado el net-tools </p> 
+       <br><br><code>
+                   sudo apt update <br>
+                   sudo apt install net-tools 
+       </code> <br><br>
+
+       <p><b>ahora si podremos ejectura el comando de netstat </b></p>
+
+
+     <code>
+         $ netstat -ltpn <br>
+        $ netstat -ltp <br> 
+     </code> <br><br>
+      <ul>
+         <li><b> netstat -ltp :</b> esto solo nos mostrar el servicio que tenemos abierto no nos mostrara el numero de puerto de nuestro servicio como por ejemplo el de telnet que se abre por el puerto 23</li> <br><br>
+           <li><b>netstat -ltpn: </b> este comando si nos mostrar el numero de puerto  pero si  el nombre del servicio pero ya sabremos que si es el 23 es el de telnet </li>
+        </ul>
+    <br><br>
+
+     <h4> COMANDOS PARA CAMBIAR EL PUERTO DEL TELNET </h4> <br><br>
+      
+     <code>
+         sudo nano /etc/services 
+     </code> <br><br>
+      <p> una vez cambiado el puerto tendremos que reiniciar el demonio de openbsd-inetd con el siguiente comando </p> <br><br>
+       <code>
+          sudo /etc/init.d/openbsd-inetd restart 
+       </code> <br><br>
+        
+
+
+     <p> concretado la instalacion y que el puerto este abierto probamos a conectarno con la siguiente sintaxis </p>
+      <code>
+          telnet usuario@(ip de tu servidor )(puerto)
+      </code> <br><br>
+
+      <p><b> para conectarnos de un usuario origen a un usuario destino lo hacemos de la siguiete manera </b></p><br><br>
+
+      <code>
+          $michael@michael$ telnet -l  michael1  michael2  
+      </code><br><br>
+      <p> aqui lo que estamo haciendo es conectarno de michael1 a michael2 atraves de michael que es mi usuario principal </p>
+       
+    <h4><b> INSTALACION DE FTP </b></h4> <br>
+     <code>
+
+         sudo apt update <br>
+         sudo apt install vsftpd
+     </code> <br>
+
+     
+
+      <p> para entrar al fichero de configuracion ftp tenemos que ejecutar el siguiente comando </p> <br><br>
+       <code>
+           sudo nano /etc/vsftpd.conf
+       </code> <br><br>
+        
+       <p> para reiniciar el servicio de ftp y ver el estado tamien tienes los siguientes comandos</p> <br>
+        <code>
+             sudo service vsftpd restart <br><br>
+             sudo service vsftpd status
+        </code> <br>
+    <h1> CONFIGURACION EN EL CLIENTE FTP </h1>
+
+     <P> en el cliente no tendremos que instalar nada por que ya viene con los sistemas linus solo tendremos que conectarnos al servidor ftp con la siguiente sintaxis  </P> <br><br>
+     <code>
+         ftp < ip servidor> 
+     </code> <br><br>
+      
+      <p> cuando estemos realizando la conexion nos pedira que nos logeomos con el nombre de nuestro usuario cliente y nuestra contrasena como usuarios clientes </p> <br><br>
+     
+      <h4>PARA VER POR QUE PUERTO ESTA ESCUCHANDO EL FTP </h4>
+       <code>
+          netstat -ltpn 
+       </code> <br><br>
+       <p>vemos que el ftp se escucha por el PUERTO 21 </p>
+       
+       <p> <b> para cerrar la conecion con dicho usuario utilizamos los siguiente </b></p> <br><br>
+         <code>
+             quit <br>
+              
+              bye <br>
+         </code> <br><br>
+
+         <p> este comando nos permite cambiar de  directorio en nuestro  host local es decir desde nuestro cliente para subir el archivo al servidor ftp</p> <br><br>
+          <code>
+              lcd  < nombre de nuestro directorio local>   
+          </code> <br><br> 
+          
+         <p><b> para descargar un archivo utilizamos el siguiete comando </b></p> <br><br>
+          <code>
+             get < nombre del archiv> 
+          </code> <br> 
+           
+          <p><b> para descargar varios archivos utilizamos el siguietne comando </b></p> <br><br>
+          <code> 
+             mget < nombre de archivo de los archivos > 
+          </code> <br><br>
+           <p> <b> para subir un archivo a un cliente a un servidor utiilizamos el siguiente comando </b></p> <br>
+            <code>
+                 put < nombre del archivo> 
+            </code> <br><br>
+            <p><b> para subir varios archivos del cliente al servidor utilizamos el siguiente comando </b></p> <br><br>
+             <code>
+                 mput < nombre de losarchivo> </code>
+        <br><br>
+
+         
+</header> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   <header>
+     <h1> INSTALACION DE SSH </h1>
+   </header> <br>
+
+    <section>
+         <h4>PRIMER PASO LA INSTALACION DE SSH </h4> <br>
+
+         <code>
+             sudo apt install openssh-server 
+         </code> <br><br>
+          <h4> INSTALACION EN EL CLIENTE </h4> <br><br>
+          <code>
+             sudo apt install openssh-client
+          </code> <br><br>
+           <h4> CONFIGURACION DEL FICHERO DE CONFIGURACION DEL SERVIDOR SSH</h4> <br><br>
+            <code>
+                 sudo nano  /etc/ssh/sshd_config 
+            </code> <br><br>
+             <h4> FICHERO DE CONFIGURACION DEL CLIENTE SSH</h4><br><br>
+             <code>
+                 sudo nano /etc/ssh/ssh_config 
+             </code> <br><br>
+              <h4>
+                PARA APLICAR LOS CAMBIOS REALIZADOS EN DICHOS FICHERO TENEMOS EL SIGUIENTE COMANDO 
+              </h4> <br><br>
+               <code>
+                 sudo systemctl restart sshd
+               </code><br><br>
+                
+               <p> para aplicar los cambios en el cliente es el siguiente comando 0</p>
+                <code>
+                     sudo systemctl restart ssh 
+                </code> <br><br>
+
+                <p> <b> para ver el estado de los dos servidores tenemos el siguiente comando </b></p><br><br>
+
+                 <code>
+                    sudo systemctl status sshd <br> <br>
+                    sudo systemctl status ssh 
+                 </code> <br><br>   
+                  
+                 <h4> ALGUNOS CAMBIOS QUE PODEMOS HACER EN EL FICHERO DE CONFIGURACION DEL SERVIDOR SON LOS SIGUIENTES </h4> <br><br>
+                  <ol>
+                     <li><b> X11fordwarding yes</b> </li>
+                       <ul>
+                          <li>  si activamos esto el cliente podra hacer la conexion con interfax grafia osea que podra abrir programas un ejemplo con el siguiente comando </li> <br>
+                             <code>
+                                  sudo -X usuario@<ip> 
+                             </code> <br>
+                                  
+                       </ul> 
+                         <li><b>PaasswordAuthentication no </b></li>
+                           <ul>
+                             <li> si modificamos este apartado y lo ponemos en no podremos acceder a nuestro servidor sin que nos pida la contrasena pero anterior mente ya tendriamos que haber accedido al servidor </li> <br><br>
+                            
+                           </ul>
+                         
+                           <li>
+                                <b> logingracetime 20 </b>
+                           </li> <br>
+                            <ul>
+                                <li> lo que hace esto es el tiempo que nos da para logearnos o  poner la contrasena por defecto viene en 3 minutos pero esto es bastante inseguro</li> 
+                            </ul> <br><br>
+
+                            <li>
+                                 <b> Permitrootlogin no </b>
+                            </li> <br><br>
+                             <ul>
+                                <li> en los linux actuales por defecto viene que no puedan acceder los usuario root pero si no es asi tendremos que descativarlo </li>
+                             </ul> <br><br>
+                              <li>
+                                 <b> maxAuthTry 3</b>
+                              </li> <br><br>
+                               <ul>
+                                 <li> lo que modificamos en esta linea es los intentos que tiene el cliente para acceder   en este caso lo puse en 3  pero por defecto viene 6 </li>
+                               </ul> <br>
+                            
+                               <li><b> maxstartup </b></li>
+                              <ul>
+                                 <li> lo que hacemos aqui es  el maximo de conexiones que se puede hacer desde una unica ip   por defecto viene 100 pero es recomendable bajarlo </li>
+                              </ul> <br><br>
+
+                              <li> <b> AlloUsers</b></li>
+                                <UL>
+                                     <li> para decirle  que usuario tienen permitido el acceso al servidor </li>
+                                </UL> <br><br>
+                            <h4>
+                                 comandos y funciones del ssh  
+                            </h4> <br>
+                             <ol>
+                                 <li><b> tenemos el comando scp </b></li>
+                             </ol> <br><br>
+                              <ul>
+                                 <li> que nos permite copiar un fichero desde una maquina a la otra  con la siguiente sintaxis es el sucesor al rcp </li> <br>
+                                <code>
+                                     sudo scp -P (port ) < fichero>  :/home<origen> 
+                                </code>
+                                </ul>
+
+                                <li><b> tenemos el sftp </b></li>
+                                  <ul>
+                                     <li> este comando lo que nos permite es transferir archivos con la siguiente sintaxis  </li> <br><br>
+                                      <code>
+                                         sudo sftp -o Port= ( numero ) usuario@servidor 
+                                      </code> <br>
+                                      <p> para descargar algo utilizamos la siguiente sintaxis </p><br><br>
+                                       <code>
+                                         get archivo  
+                                       </code> <br>
+                                        <p> para movernos en nuestro directorio local utilizamos la siguiente sintaxis </p> <br>
+                                         <code>
+                                             lcd Descargas/  
+                                         </code> <br>
+                                        
+
+                                  </ul>
+
+                                  <li><b> ejecutar comando mediante ssh </b></li>
+                                  <ul>
+                                     <li> con la siguiente sintaxis podras ejecutar comando  sin estar dentro del servidor  </li> <br>
+                                      <code>
+                                          ssh usuario@remotehost  ls 
+                                      </code> <br><br>
+                                        
+                                  </ul>
+                  </ol>
+
+              <h4> COMO GENERAR CLAVES</h4> <br><br>
+               <code>
+                  ssh-keygen 
+               </code> <br>
+                <p> con esto podremos generar claves si no especificamos el algoritmos que queremos utilizar por defecto nos creara un rsa  </p> <br><br>
+                 
+                <h6> Generar claves con un algoritmo en concreto y con el tamano que queramos  </h6> <br><br>
+                 <code>
+                     ssh-keygen -t rsa -b 2068
+                 </code> <br><br>
+                   <ul>
+                     <li> <b> -t : </b> aqui le estoy indicando el algoritmo que quiero utilizar para generar las claves   </li> <br>
+                      <li> <b> -b : </b>aqui le estoy indicando el tamano que quiero que tenga mi clave </li> <br>
+                       
+                   </ul><br>
+                  <h4> tipos de claves que podemos generar son las siguientes </h4> <br>
+                    <ol>
+                         <li><b>RSA</b></li>
+                          <ul>
+                             <li> tamano de minimo 1024 bits pero por defecto tiene 2048 bits   es seguro y bastante utilizado </li> 
+                          </ul> <br>
+                           <li><b>DSA</b></li>
+                            <ul>
+                                 <li> tamano de 1024 bits justo esta en desusaso desdel OPENSSH7.0  por su inseguridad </li>
+                            </ul> <br>
+
+                            <li><b> ECDSA </b></li><br><br>
+                             <ul>
+                                 <li> es una version mejorada del dsa  basada en la criptografia de curva eliptica  su tamano es 256 bits,384 y  521 es bastante seguro pero el siguiente loo supera </li>
+                             </ul> <br><br>
+
+                             <li><b> EC25519 </b></li><br>
+                              <ul>
+                                <li> implementacion ECSA basada en la criptografia EC25519 es la mas segura de todas  tiene un tamano de 256 bits fijo y es muy seguro por no decir bastante seguro </li>
+                              </ul> <br>
+                            
+                
+                    </ol>
+                
+                    <p> cuando establecemos conexion con el servidor ssh por primera vez  nos aparecera un mensaje que es la huella del servidor y  dicha huella tambien llama fingerprint   cuando accedamos al servidor se creara en el directorio de .ssh el fichero know_host para futuras conexiones con dicho servidor  es decir aqui se guarda los finger prints o tambiem llamado las huellas de los servidores </p> <br>
+
+                    <h4> COMO ENVIAR NUESTRA CLAVE PUBLICA AL SERVIDOR </h4> <br><br>
+                     <code>
+                          ssh-copy-id  usuariO@ ip servidor> 
+                     </code> <br>
+                       
+                     <p>esta clave estara  dentro del archivo authesikey del servidor </p> <br>
+                    
+                     <p> con el comando "cat" tambien puedes pasar tu clava publica </p> <br><br>
+
+                      <p> ojo la clave publica siempre es la que temina en .pub y la clave privada es la que no tiene </p>
+                    
+               <p> una huella digital se crear utilizan una funcio hash  </p><br><br>
+                <p>
+                     los permisos de las claves son los siguietne 600 solo pueden ser leeido y escritos por el rooot (rw ) esto para la clave privada 
+                </p> <br> 
+                <p> por otro lado tenemos la clave publica que tiene 644 que pueden ser leido por los grupos y otros propietarios  </p> <br>
+
+                 <p> puedes ver las claves de las siguientes manera </p> <br><br>
+                  <code>
+                       ssh-keygen -l -f /etc/.ssh/ssh_host_rsa_key <br>
+
+                       ssh-keygen -l -f /etc/.ssh/ssh_host_rsa_key.pub
+
+                </code> <br>
+                 <ul>
+                    <li><b> -l : </b> lo que hace esta opcion es listar </li>
+                     <li><b> -f : </b> lo que hace es especificar la ruta de las claves  </li>
+                 </ul>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

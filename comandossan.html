@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>configuracionSAN</title>
+    <style>
+       
+         h1{
+             position: absolute;
+             border: 1px solid black ;
+              background-color: black;
+               color: yellow ;
+               font-weight: 900px;
+                
+         }
+         h2{
+             position: absolute;
+             border: 1px solid white  ;
+              background-color: black;
+               color: red;
+                font-weight: 900px;
+         }
+        .uno{
+              position: absolute;
+              border: 2px solid white ;
+              width: 300px;
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .dos{
+             position: absolute;
+              border: 2px solid white;
+              width: 300px ;
+              height: auto ;
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+               
+        }
+        .tres{
+             position: absolute;
+              border: 2px solid white;
+              width: 600px ;
+              height: auto ;
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              
+               
+        }
+        .cuatro{
+             position: absolute;
+              border: 2px solid white;
+              width: 300px ;
+              height: auto ;
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              
+               
+        }
+        .cinco{
+             position: absolute;
+              border: 2px solid white;
+              width: 300px ;
+              height: auto ;
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              
+               
+        }
+        .seis{
+             position: absolute;
+              border: 2px solid white;
+              width: 300px ;
+              height: auto ;
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              
+               
+        }
+    </style>
+</head>
+<body>
+    
+ <header>
+     <h1>CONFIGURACION DEL SERVIDOR SAN Y LOS CLIENTES SAN </h1>
+ </header> <br>
+
+  <main class="contenido">
+     
+     <h4> instalamos el paquete  al servidor san </h4> <br>
+      <code class="uno">
+          sudo apt update <br>
+        sudo apt install tgt <br>
+    
+       </code> <br>
+       <h4>  creamos los target en el siguiente fichero </h4>
+   
+        <code class="dos ">
+             sudo nano /etc/tgt/targets.conf  <br>
+             
+        </code> <br>
+         <p> modificamos las siguientes lineas en ese fichero " anadiremos un iqn ( iscsi)"  </p> <br>
+          <code class="tres">
+
+             default-driver iscsi <br><br>
+             < target iqn.michael com remotedisk office:target1> <br><br>
+              backing-store /dev/sda <br><br><br>
+            initiator-addresses 172.16.0.4 <br><br>
+            < / target> <br> <br>
+          </code> <br><br><br><br><br><br><br><br><br><br><br><br>
+           
+           <ol>
+              <li> explicacion de cada linea que modificamos en ese fichero </li>
+           </ol> <br>
+             <ul>
+                 <li> <b> backing-store ;</b>  disdo donde vamos a almacena </li> <br>
+                  <li> <b> initiato-address : </b> direccion ip de la maquina que usara nuestro volumen </li>
+             </ul> <br>
+        <h4> SIGUIENTE PASO REINICIAR  EL  SERVIDOR </h4>
+         <ol>
+            <li> con el siguiente comando puedes parar el servicio de tgt <br><br> <code class="cuatro"> service tgt stop </code></li> <br><br>
+             <li> con el siguiente comando puedes  reiniciar el servicio de tgt  <br><br> <code class="cinco "> service tgt start </code></li> <br><br>
+              <li> con el siguiente comando puedes ver el estado del servicio tgt <br><br><code class="seis "> service tgt status </code></li> <br><br>
+         </ol> <br><br>
+          
+          <h2>CONFIGURACION EN LA MAQUINA CLIENTE EN NUESTRO CASO VA HACER UNA MAQUINA WINDOWS </h2> <br>
+
+           <ol>
+              <li> panel de contro > iscsi > configurar inicados iscsi </li>
+           </ol> <br>
+             <ul>
+                 <li> pulsamos en "SI" en la ventana que nos aparece </li>
+             </ul> <br>
+             <ol>
+                 <li> Enste paso nos aparece la ventana de  <b>propiedades  </b> > </li> <br>
+                   
+             </ol> <br>
+               <ul>
+                   <li> <b> escribimos la ip del servidor SAN > configuracion rapida </b></li> <br>
+                     <li> el la ventana siguiente que nos aparece pulsamos en <b> listo </b> te aparece la linea de " iqn " </li> <br>
+                     <li>
+                         si ahora nos dirimos a  <b> administracion de dispositivos  >>   y a unidades de disco >> nos aparece nuestro disco SCSI </b>
+                     </li> <br>
+
+                    
+               </ul>
+
+        <h4>
+             Nos dirijimos al fichero de administracion de discos
+        </h4> <br>
+          <ul>
+              <li> inicialisamos el disco  </li> <br>
+               <li> marcamos el disco >> <b> click derecho sobre el disco >> marcamos volumen dinamico </b></li> <br>
+               <li>pulsamos en siguiente  </li> <br>
+                <li>
+                    aqui nos pedira especifica el tamano de nuestro disco le damos en <b> siguiente </b> valor por defecto 
+                </li> <br>
+                 <li> aqui le tenemos que asignar una letra  en nuestro caso le asignamos la Z >> siguiete </li> <br>
+                  <li> aqui le tenemos que asignar un nombre >> MICAHEL >> siguiente </li> <br>
+                   <li> aqui vemos todas las caracteristicas de nuestro disco y  pinchamos en <b>finalizar </b></li> <br>
+                    <li> la nueva unidad aparece ya en la ventana de administracion de disco</li>
+                    <li> ahora si te diriges al <b> gestor de archivo de windows deberias ver el disco en  >>> Equipo >> MICHAEL </b></li>
+          </ul>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
